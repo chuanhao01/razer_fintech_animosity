@@ -65,6 +65,80 @@ const model = {
             });
         }
     },
+    questions: {
+        createQuestion(title, description, points, ans){
+            return new Promise((resolve, reject) => {
+                const questionId = uuid();
+                pool.query(`
+                INSERT INTO QUESTIONS
+                (questionId, title, description, points, ans)
+                VALUES
+                ($1, $2, $3, $4, $5)
+                `, [questionId, title, description, points, ans], function(err, res){
+                    if(err){
+                        reject(err);
+                    }
+                    resolve(res);
+                });
+            });
+        },
+        getAllQuestions(userId){
+            return new Promise((resolve, reject) => {
+                pool.query(`
+                SELECT q.title, q.questionId, q.description, q.points, coalesce(qa.done, 0) AS "done" FROM
+                QUESTIONS q
+                LEFT JOIN (
+                    SELECT * FROM QUESTIONS_ANS
+                    WHERE userId = $1
+                ) qa ON q.questionId = qa.questionId
+                `, [userId], function(err, res){
+                    if(err){
+                        reject(err);
+                    }
+                    resolve(res);
+                });
+            });
+        },
+        getQuestion(questionId){
+            return new Promise((resolve, reject) => {
+                pool.query(`
+                SELECT * FROM QUESTIONS
+                WHERE questionId = $1 
+                `, [questionId], function(err, res){
+                    if(err){
+                        reject(err);
+                    }
+                    if(res.rowCount !== 1){
+                        reject('Multiple or no question');
+                    }
+                    resolve(res.rows[0]);
+                });
+            });
+        },
+        checkAnswer(questionId, ans){
+            return this.getQuestion(questionId)
+            .then(
+                function(question){
+                    return question.ans === ans;
+                }
+            );
+        },
+        answerQuestion(questionId, userId){
+            return new Promise((resolve, reject) => {
+                pool.query(`
+                INSERT INTO QUESTIONS_ANS
+                (questionId, userId, done)
+                VALUES
+                ($1, $2, 1)
+                `, [questionId, userId], function(err, res){
+                    if(err){
+                        reject(err);
+                    }
+                    resolve(res);
+                });
+            });
+        },
+    },
 };
 
 module.exports = model;

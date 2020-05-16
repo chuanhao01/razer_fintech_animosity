@@ -55,7 +55,7 @@ function(username, password, done){
     .then(
         function(user){
             done(null, {
-                userId: user.userId,
+                userId: user.userid,
                 username: user.username
             });
         }
