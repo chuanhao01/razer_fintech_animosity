@@ -7,7 +7,7 @@ var API_BASE_URL = "localhost:3000"
 
 function LoginForm(props) {
     const [state, setState] = useState({
-        email: "",
+        username: "",
         password: "",
         successMessage: null
     })
@@ -22,7 +22,7 @@ function LoginForm(props) {
     const handleSubmitClick = (e) => {
         e.preventDefault();
         const payload = {
-            "email": state.email,
+            "username": state.username,
             "password": state.password,
         }
         axios.post(API_BASE_URL + 'login', payload)
@@ -58,16 +58,16 @@ function LoginForm(props) {
         <div className="card col-12 col-lg-4 login-card mt-2 hv-center">
             <form>
                 <div className="form-group text-left">
-                    <label htmlFor="exampleInputEmail1">Email address</label>
-                    <input type="email"
+                    <label htmlFor="exampleInputusername1">username address</label>
+                    <input type="username"
                         className="form-control"
-                        id="email"
-                        aria-describedby="emailHelp"
-                        placeholder="Enter email"
-                        value={state.email}
+                        id="username"
+                        aria-describedby="usernameHelp"
+                        placeholder="Enter username"
+                        value={state.username}
                         onChange={handleChange}
                     />
-                    <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
+                    <small id="usernameHelp" className="form-text text-muted">We'll never share your username with anyone else.</small>
                 </div>
                 <div className="form-group text-left">
                     <label htmlFor="exampleInputPassword1">Password</label>
