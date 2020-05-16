@@ -48,7 +48,7 @@ function LoginForm(props) {
     }
     const redirectToHome = () => {
         props.updateTitle('Home')
-        props.history.push('/home');
+        props.history.push('../quiz_questions/home.js');
     }
     const redirectToRegister = () => {
         props.history.push('/register');
@@ -58,7 +58,7 @@ function LoginForm(props) {
         <div className="card col-12 col-lg-4 login-card mt-2 hv-center">
             <form>
                 <div className="form-group text-left">
-                    <label htmlFor="exampleInputusername1">username address</label>
+                    <label htmlFor="exampleInputusername1">Username</label>
                     <input type="username"
                         className="form-control"
                         id="username"
