@@ -1,10 +1,10 @@
 require('dotenv').config();
 
-const {Pool} = require('pg');
-const pool = new Pool({
-    connectionString: process.env.PG_URL,
-    max: 5,
-});
+// const {Pool} = require('pg');
+// const pool = new Pool({
+//     connectionString: process.env.PG_URL,
+//     max: 5,
+// });
 
 // const init = `
 // DROP TABLE IF EXISTS USERS, QUESTIONS, QUESTIONS_ANS;
@@ -103,5 +103,8 @@ let b = [
 // }
 
 
-model.questions.getAllQuestions('1d9556a5-dbd5-4a73-86f5-a22c1aaa87c3')
-.then((res) => console.log(res.rows));
+// model.questions.getAllQuestions('1d9556a5-dbd5-4a73-86f5-a22c1aaa87c3')
+// .then((res) => console.log(res.rows));
+
+const api = require('./api');
+api.perx.getAllRewards();
