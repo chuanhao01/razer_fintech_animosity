@@ -113,12 +113,23 @@ app.use(passport.session());
 const middlewares = require('./middlewares');
 middlewares.init(app);
 
+// Setting up the login controller
+app.post('/login', passport.authenticate('local', {
+    failureRedirect: '/logout',
+}), function(req, res){
+    res.status(200).send();
+});
+app.get('/logout', function(req, res){
+    req.logout();
+    res.redirect('http://localhost:3000');
+});
+
 // Setting up controllers
 const controllers = require('./controllers/index');
 controllers.init(app);
 
 // Setting up ports
-const PORT  = 3000;
+const PORT  = 3001;
 app.listen(PORT, function(){
     console.log(`Server listening at port ${PORT}`);
 });
