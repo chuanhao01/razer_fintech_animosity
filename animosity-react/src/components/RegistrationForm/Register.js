@@ -67,7 +67,7 @@ function RegistrationForm(props) {
         <div className="card col-12 col-lg-4 login-card mt-2 hv-center">
             <form>
                 <div className="form-group text-left">
-                    <label htmlFor="exampleInputusername1">username address</label>
+                    <label htmlFor="exampleInputusername1">Username</label>
                     <input type="username"
                         className="form-control"
                         id="username"
