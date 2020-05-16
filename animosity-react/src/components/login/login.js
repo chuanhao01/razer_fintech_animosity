@@ -48,7 +48,7 @@ function LoginForm(props) {
     }
     const redirectToHome = () => {
         props.updateTitle('Home')
-        props.history.push('/home');
+        props.history.push('../quiz_questions/home.js');
     }
     const redirectToRegister = () => {
         props.history.push('/register');
