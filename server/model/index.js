@@ -136,6 +136,45 @@ const model = {
                     }
                     resolve(res);
                 });
+            })
+            .then(
+                function(){
+                    return this.getQuestion(questionId);
+                }.bind(this)
+            )
+            .then(
+                function(question){
+                    return new Promise((resolve, reject) => {
+                        pool.query(`
+                        UPDATE USERS
+                        SET points = points + $1
+                        WHERE userId = $2
+                        `, [question.points, userId], function(err, res){
+                            if(err){
+                                reject(err);
+                            }
+                            resolve(res);
+                        });
+                    });
+                }
+            );
+        },
+        answerBefore(questionId, userId){
+            return new Promise((resolve, reject) => {
+                pool.query(`
+                SELECT * FROM QUESTIONS_ANS
+                WHERE (questionId = $1) AND (userId = $2)
+                `, [questionId, userId], function(err, res){
+                    if(err){
+                        reject(err);
+                    }
+                    if(res.rowCount === 1){
+                        resolve(true);
+                    }
+                    else{
+                        resolve(false);
+                    }
+                });
             });
         },
     },
