@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
-import nav from './global/nav';
+import Header from './global/nav';
 import LoginForm from './login/login';
 import RegistrationForm from './RegistrationForm/Register';
 import Home from './quiz_questions/home';
@@ -16,7 +16,7 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <nav title={title} />
+        <Header title={title} />
         <div className="container d-flex align-items-center flex-column">
           <Switch>
             <Route path="/" exact={true}>
