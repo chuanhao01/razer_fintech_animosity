@@ -57,7 +57,7 @@ const controllers = {
             const questionId = req.params.questionId;
             return new Promise((resolve) => {
                 resolve(
-                    model.questions.checkAnswer(questionId, ans)
+                    model.questions.answerBefore(questionId, req.user.userId)
                     .catch(
                         function(err){
                             res.status(500).send();
@@ -66,6 +66,35 @@ const controllers = {
                     )
                 );
             })
+            .then(
+                function(doneBefore){
+                    return new Promise((resolve, reject) => {
+                        if(doneBefore){
+                            reject('Done before');
+                        }
+                        else{
+                            resolve(true);
+                        }
+                    })
+                    .catch(
+                        function(err){
+                            res.status(500).send();
+                            throw err;
+                        }
+                    );
+                }
+            )
+            .then(
+                function(){
+                    return model.questions.checkAnswer(questionId, ans)
+                    .catch(
+                        function(err){
+                            res.status(500).send();
+                            throw err;
+                        }
+                    );
+                }
+            )
             .then(
                 function(isCorrect){
                     return new Promise((resolve, reject) => {
@@ -106,6 +135,7 @@ const controllers = {
             )
             .catch(
                 function(err){
+                    console.log(err);
                     return;
                 }
             );
