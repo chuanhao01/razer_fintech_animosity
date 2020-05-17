@@ -13,6 +13,15 @@ const api = {
                     return res.data;
                 }
             );
+        },
+        buyReward(rId){
+            return axios
+            .post(`/v4/rewards/${rId}/issue`)
+            .then(
+                function(res){
+                    return res;
+                }
+            );
         }
     },
 };

@@ -29,6 +29,7 @@ const controllers = {
         });
         // Questions
         app.get('/questions', function(req, res){
+            console.log(req.user);
             return new Promise((resolve) => {
                 resolve(
                     model.questions.getAllQuestions(req.user.userId)
@@ -151,7 +152,13 @@ const controllers = {
             );
         });
         app.post('/buy/rewards/:rId', function(req, res){
-            
+            api.perx.buyReward(req.params.rId)
+            .then(
+                function(aRes){
+                    console.log(aRes);
+                    res.status(200).send();
+                }
+            );
         });
     }
 };
