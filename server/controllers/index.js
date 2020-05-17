@@ -1,4 +1,5 @@
 const model = require('../model');
+const api = require('../api');
 
 const controllers = {
     init(app){
@@ -139,6 +140,18 @@ const controllers = {
                     return;
                 }
             );
+        });
+        // Rewards
+        app.get('/rewards', function(req, res){
+            api.perx.getAllRewards()
+            .then(
+                function(data){
+                    res.send(data);
+                }
+            );
+        });
+        app.post('/buy/rewards/:rId', function(req, res){
+            
         });
     }
 };

@@ -82,7 +82,10 @@ const app = express();
 
 // Adding CORS
 const cors = require('cors');
-app.use(cors());
+app.use(cors({
+    credentials: true,
+    origin: 'http://localhost:3000'
+}));
 
 // Setting up cookieParser
 const cookieParser = require('cookie-parser');

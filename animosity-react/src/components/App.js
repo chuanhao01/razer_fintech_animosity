@@ -4,6 +4,7 @@ import Header from './global/nav';
 import LoginForm from './login/login';
 import RegistrationForm from './RegistrationForm/Register';
 import Home from './quiz_questions/home';
+import Rewards from './rewards/rewards';
 import {
   BrowserRouter as Router,
   Switch,
@@ -30,6 +31,9 @@ function App() {
             </Route>
             <Route path="/home">
               <Home />
+            </Route>
+            <Route path="/rewards">
+              <Rewards />
             </Route>
           </Switch>
           <AlertComponent errorMessage={errorMessage} hideError={updateErrorMessage} />

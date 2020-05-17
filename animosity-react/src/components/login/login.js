@@ -3,7 +3,7 @@ import axios from 'axios';
 import './login.css';
 import { withRouter } from "react-router-dom";
 
-var API_BASE_URL = "localhost:3000"
+var API_BASE_URL = "http://localhost:3001"
 
 function LoginForm(props) {
     const [state, setState] = useState({
@@ -25,9 +25,14 @@ function LoginForm(props) {
             "username": state.username,
             "password": state.password,
         }
-        axios.post(API_BASE_URL + 'login', payload)
+        axios.post(API_BASE_URL + '/login', payload, {
+            withCredentials: true,
+            headers: {
+                'Access-Control-Allow-Origin': 'http://localhost:3001',
+            } 
+        })
             .then(function (response) {
-                if (response.data.code === 200) {
+                if (response.status === 200) {
                     setState(prevState => ({
                         ...prevState,
                         'successMessage': 'Login successful. Redirecting to home page..'

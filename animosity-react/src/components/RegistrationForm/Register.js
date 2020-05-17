@@ -3,7 +3,7 @@ import axios from 'axios';
 import './Register.css';
 import { withRouter } from "react-router-dom";
 
-var API_BASE_URL = "localhost:3000"
+var API_BASE_URL = "http://localhost:3001"
 
 function RegistrationForm(props) {
     const [state, setState] = useState({
@@ -26,7 +26,7 @@ function RegistrationForm(props) {
                 "username": state.username,
                 "password": state.password,
             }
-            axios.post(API_BASE_URL + 'register', payload)
+            axios.post(API_BASE_URL + '/register', payload)
                 .then(function (response) {
                     if (response.data.code === 200) {
                         setState(prevState => ({
