@@ -1,5 +1,7 @@
 # Razer_fintech_animosity
 
+**This project has been archived as of 27/09/2020**
+
 To run the 2 servers do:
 ```bash
 cd animosity-react
